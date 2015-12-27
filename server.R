@@ -14,13 +14,6 @@ means <- function(noSim, n, lambda) {
 }
 
 
-# # Simulate variances of exponential samples
-# vess <- function(noSim, n, lambda) {
-#     ves <- NULL
-#     for (i in 1:noSim) ves <- c(ves, var(rexp(n, lambda)))
-#     return(ves)
-# }
-
 set.seed(123)
 
 shinyServer(
@@ -62,14 +55,10 @@ shinyServer(
             
             # Given the theorectical mean in this case, 
             # draw the theoretical probability density of normal distribution
-            x_axis <- reactive({seq(min(mes()), 
-                                    max(mes()), 
-                                    length = 88)})
-            vmes <- reactive({round(var(mes()), 3)})
-            y_axis <- reactive({dnorm(x_axis(), 
-                                      mean = theoretical_mean, 
-                                      sd = sqrt(vmes()))})
-            lines(x_axis(), y_axis(), col = "magenta", lty = 2, lwd = 2)
+            x_axis <- seq(min(mes()), max(mes()), length = 88)
+            vmes <- round(var(mes()), 3)
+            y_axis <- dnorm(x_axis, mean = theoretical_mean, sd = sqrt(vmes))
+            lines(x_axis, y_axis, col = "magenta", lty = 2, lwd = 2)
             
             # Draw the probability density of the simulated sample means
             lines(density(mes()), col = "cyan", lwd = 2)
@@ -88,10 +77,5 @@ shinyServer(
                        lty = c(1, 1, 3, 2, 1), lwd = c(12, 4, 2, 2, 1))
             }
         })
-        
-        # output$theoretical_variance <- reactive({ 
-        #     round((1 / as.numeric(input$lambda))^2 / as.numeric(input$n), 3)})
-        # variance of the 1000 simulated exponential sample means
-        # output$vmes <- reactive({round(var(mes()), 3)})
     }
 )
