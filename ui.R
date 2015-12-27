@@ -2,7 +2,7 @@ library(shiny)
 
 shinyUI(
     fluidPage(
-        titlePanel(strong("Play with the Exponential Distribution")),
+        titlePanel(strong("Demonstration of Central Limit Theorem")),
         sidebarLayout(
             sidebarPanel(
                 h4("Developing Data Products - Assignment - part 1"),
@@ -11,6 +11,7 @@ shinyUI(
                   deployed on the RStudio's server."), 
                 tags$hr(),
                 h3("Set parameters:"),
+                p('(Note that a seed number is set to be "123" in this app.)'),
                 textInput(
                     inputId = "lambda", 
                     label = "Rate parameter for the exponential distribution:", 
@@ -42,15 +43,16 @@ shinyUI(
                 p("In this app, we may play with the",
                   a(href="https://en.wikipedia.org/wiki/Exponential_distribution", 
                     "exponential distribution"),
-                  "and compare it with the", 
+                  "; then compare it with, and demonstrate, the", 
                   a(href="https://en.wikipedia.org/wiki/Central_limit_theorem", 
-                    "Central Limit Theorem"), ".",
+                    "central limit theorem"), ".",
                   "Through simulation, we may view the basic properties of
                   the distribution of the mean of a specified 
-                  number of exponentials. Relevant parameters, whose default 
-                  values have been already given, could be set via the 
-                  textboxes and slider on the left-hand side of this page."), 
-                p('(Note that a seed number is set to be "123" in this app.)'),
+                  number of exponentials. Some relevant parameters have been 
+                  already given with the launch of this app (see the textboxes 
+                  and slider on the left-hand side of this page). 
+                  We could simply alter those values manually and view the
+                  changes of the distribution shown in the figure below"), 
                 tags$hr(),
                 textOutput(outputId = "text"), 
                 plotOutput(outputId = "mHist")
